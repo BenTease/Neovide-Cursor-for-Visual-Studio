@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)microsoft.vssdk.compatibilityanalyzer\17.14.2094\build\Microsoft.VsSDK.CompatibilityAnalyzer.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.vssdk.compatibilityanalyzer\17.14.2094\build\Microsoft.VsSDK.CompatibilityAnalyzer.targets')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.visualstudio.sdk.analyzers\17.7.79\build\Microsoft.VisualStudio.SDK.Analyzers.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.visualstudio.sdk.analyzers\17.7.79\build\Microsoft.VisualStudio.SDK.Analyzers.targets')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.vssdk.buildtools\17.14.2094\build\Microsoft.VSSDK.BuildTools.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.vssdk.buildtools\17.14.2094\build\Microsoft.VSSDK.BuildTools.targets')" />
+  </ImportGroup>
+</Project>

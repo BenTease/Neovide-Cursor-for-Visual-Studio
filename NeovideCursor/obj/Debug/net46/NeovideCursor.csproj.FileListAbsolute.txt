@@ -1,0 +1,3 @@
+D:\Users\Documents\smoothcaret-2\NeovideCursor\obj\Debug\net46\NeovideCursor.csproj.AssemblyReference.cache
+D:\Users\Documents\smoothcaret-2\NeovideCursor\obj\Debug\net46\NeovideCursor.GeneratedMSBuildEditorConfig.editorconfig
+D:\Users\Documents\smoothcaret-2\NeovideCursor\obj\Debug\net46\NeovideCursor.csproj.CoreCompileInputs.cache
