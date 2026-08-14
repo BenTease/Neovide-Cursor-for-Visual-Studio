@@ -254,9 +254,20 @@ internal class Adornment
 			}
 
 			IWpfTextViewLine line = view.GetTextViewLineContainingBufferPosition(position.BufferPosition);
-			double height = line != null ? line.TextHeight : 18;
-			double width = IsOverwriteMode() ? GetOverwriteWidth() : manager.CaretWidth;
+
+			// VS applies zoom (Ctrl+wheel) as a render transform: PointToScreen below already
+			// scales the position, but the line metrics (TextHeight / ColumnWidth) stay
+			// unscaled. Multiply the caret quad by the zoom factor so it grows/shrinks with
+			// the font instead of staying pinned at the line top at the old size.
+			double zoom = GetZoomFactor();
+			double height = (line != null ? line.TextHeight : 18) * zoom;
+			double width = (IsOverwriteMode() ? GetOverwriteWidth() : manager.CaretWidth) * zoom;
 			caretSize = new Size(width, height);
+
+			if (zoom != 1.0)
+			{
+				Diagnostics.Log("caret size (zoomed) zoom=" + zoom + " width=" + width + " height=" + height);
+			}
 
 			Point viewportPoint = mapping.GetPoint(position);
 			Point screen = view.VisualElement.PointToScreen(viewportPoint);
@@ -271,6 +282,23 @@ internal class Adornment
 		{
 			return false;
 		}
+	}
+
+	/// <summary>Zoom factor (1.0 = 100%). VS zoom scales the rendered position but not the line metrics.</summary>
+	private double GetZoomFactor()
+	{
+		try
+		{
+			double z = view.ZoomLevel / 100.0;
+			if (z > 0 && !double.IsNaN(z) && !double.IsInfinity(z))
+			{
+				return z;
+			}
+		}
+		catch (Exception)
+		{
+		}
+		return 1.0;
 	}
 
 	private ICaretVisibility CreateVsCaret()
